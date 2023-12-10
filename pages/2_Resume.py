@@ -14,7 +14,7 @@ def get_image_base64(path):
     with open(path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 # URL to link to
-link_url = "https://www.linkedin.com/in/nandinicomar/"
+link_url = "https://www.linkedin.com/in/kshitijyad/"
 
 encoded_image = get_image_base64(image_path)
 html_code = f"""
@@ -30,7 +30,7 @@ st.title("📝 Resume")
 
 st.write("[Click here if it's blocked by your browser](https://cognitiveclass.ai/)")
 
-with open("data/Resume_Nandini_Comar.pdf","rb") as f:
+with open("data/Resume Kshitij.pdf","rb") as f:
       base64_pdf = base64.b64encode(f.read()).decode('utf-8')
       pdf_display = F'<iframe src="data:application/pdf;base64,{base64_pdf}" width="1000mm" height="1000mm" type="application/pdf"></iframe>'
       st.markdown(pdf_display, unsafe_allow_html=True)
