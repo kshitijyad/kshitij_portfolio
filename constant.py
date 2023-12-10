@@ -1,12 +1,13 @@
 info = {
-   "Pronoun": "her", 
-   "Name": "Nandini",
-   "Full_Name": "Nandini Comar",
-   "Intro": "New York Registered Lawyer, with experince in Intellectual Property, Trademark, Contracts and Patents",
-   "About":"Hey there, I’m Nandini Comar, a seasoned Intellectual Property (IP) Lawyer specializing in Intellectual Property , Trademarks, contract compliance, patent advisory, and open-source licensing.",
-   "City":"New York, United States",
-   "Email": "comarnan@gmail.com"
+    "Pronoun": "he",
+    "Name": "Kshitij",
+    "Full_Name": "Kshitij Yadav",
+    "Intro": "Data-Driven Leader and Product Analytics Expert with a strong background in Machine Learning, Data Science, and Product Management.",
+    "About": "Hello, I'm Kshitij Yadav. I excel in utilizing data-driven approaches to guide product development and enhance user experience. My expertise includes product analytics, machine learning, experimental design, and leading high-impact data science teams.",
+    "City": "New York, United States",
+    "Email": "kshitijyad@gmail.com"
 }
+
 
 embed_rss= {
     'rss':"""<div style="overflow-y: scroll; height:500px; background-color:white;"> <div id="retainable-rss-embed" 
@@ -27,5 +28,6 @@ def image_to_base64(image_path):
 endorsements = {
     "img1": image_to_base64("images/recommendation1.png"),
     "img2": image_to_base64("images/recommendation2.png"),
-    "img3": image_to_base64("images/recommendation3.png")
+    "img3": image_to_base64("images/recommendation3.png"),
+    "img4": image_to_base64("images/recommendation4.png")
 }

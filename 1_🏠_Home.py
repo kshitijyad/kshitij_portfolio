@@ -21,13 +21,13 @@ pronoun = info["Pronoun"]
 name = info["Name"]
 
 # -----------------  loading assets  ----------------- #
-image_path = "images/nandini.jpg"
+image_path = "images/kshitij.png"
 
 def get_image_base64(path):
     with open(path, "rb") as img_file:
         return base64.b64encode(img_file.read()).decode()
 # URL to link to
-link_url = "https://www.linkedin.com/in/nandinicomar/"
+link_url = "https://www.linkedin.com/in/kshitijyad/"
 
 encoded_image = get_image_base64(image_path)
 html_code = f"""
@@ -39,12 +39,6 @@ html_code = f"""
 # Display the clickable image in the sidebar
 st.sidebar.markdown(html_code, unsafe_allow_html=True)
 
-    
-def load_lottieurl(url: str):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
 
 def local_css(file_name):
     with open(file_name) as f:
@@ -54,20 +48,27 @@ local_css("style/style.css")
 
 
 # ----------------- info ----------------- #
-def gradient(color1, color2, color3, content1, content2):
-    st.markdown(f'<h1 style="text-align:center;background-image: linear-gradient(to right,{color1}, {color2});font-size:60px;border-radius:2%;">'
-                f'<span style="color:{color3};">{content1}</span><br>'
-                f'<span style="color:white;font-size:17px;">{content2}</span></h1>', 
-                unsafe_allow_html=True)
-
-with st.container():
-    col1,col2 = st.columns([8,3])
 
 full_name = info['Full_Name']
-with col1:
-    gradient('#FFD4DD','#000395','e0fbfc',f"Hi, I'm {full_name}👋", info["Intro"])
-    st.write("")
-    st.write(info['About'])     
+
+def gradient(color1, color2, color3, content1, content2):
+    st.markdown(f"""
+    <h1 style="text-align:center; background-image: linear-gradient(to right, {color1}, {color2}); font-size:60px; border-radius:2%; box-shadow: 0px 2px 5px rgba(0,0,0,0.2);">
+        <span style="color:{color3};">{content1}</span><br>
+        <span style="color:white; font-size:18px;">{content2}</span>
+    </h1>
+    """, unsafe_allow_html=True)
+
+# Gradient header outside of columns for full width
+gradient('#FFD4DD','#000395','e0fbfc',f"Hi, I'm {full_name}👋", info["Intro"])
+
+with st.container():
+
+    st.markdown(f"""
+        <div style="font-size:18px; line-height: 1.6; ">
+            <br> {info['About']}
+        </div>
+    """, unsafe_allow_html=True) 
     
 # ----------------- Llama ----------------- #
 openai.api_key = st.secrets["OPENAI_API_KEY"]
@@ -104,7 +105,7 @@ query_engine = index.as_query_engine(text_qa_template=qa_template)
 # Function to handle the query and display the answer
 # Function to handle the query and display the answer
 def handle_query(query):
-    with st.spinner('🔍 Analyzing Nandini’s expertise... 📚 Please hold on a moment! 💫'):
+    with st.spinner('🧙🏻‍♂️ 🔍 Analyzing Kshitij’s expertise... 📚 Please hold on a moment! 💫'):
         try:
             answer = query_engine.query(query).response
 
@@ -131,13 +132,33 @@ def handle_query(query):
 
 # Predefined questions
 questions = [
-    "What are Nandini's key achievements in her legal career?",
-    "Can you elaborate on Nandini's specialization in intellectual property law and how she has applied it in her past roles?",
-    "What unique skills does Nandini bring to a legal team, and how have these contributed to her previous workplaces?",
-    "How has Nandini demonstrated professional growth throughout her career, and what are her long-term career aspirations?"
+    "What are Kshitij's key achievements in his data science and analytics career?",
+    "Can you elaborate on Kshitij's expertise in data science and business analytics and how he has applied it in his past roles?",
+    "What unique skills does Kshitij bring to a data science team, and how have these contributed to his previous workplaces?",
+    "How has Kshitij demonstrated professional growth throughout his career, and what are his long-term professional aspirations?"
 ]
 
-st.markdown("<h4 style='text-align: Left; color: White;'>I am an AI-enabled search bar, and can assist you with questions about Nandini</h4>", unsafe_allow_html=True)
+st.markdown('<br>', unsafe_allow_html=True)
+
+st.markdown("""
+    <style>
+        /* Targeting the text input widget */
+        .stTextInput > div > div > input {
+            color: black; /* Text color */
+            background-color: white; /* Background color */
+            padding: 10px; /* Padding */
+            border-radius: 10px; /* Rounded corners */
+            border: 1px solid #ccc; /* Border color and width */
+        }
+    </style>
+""", unsafe_allow_html=True)
+st.divider()
+# Text input for user questions
+st.subheader("**You can know more about Kshitij, by entering your questions here:**")
+user_input = st.text_input("", placeholder="🧙🏻‍♂️: I am an AI-enabled search bar, and can assist you with questions about Kshitij")
+
+st.markdown('<br> 🖋️ Or, **Simply click** these questions below 👇 ', unsafe_allow_html=True)
+
 
 
 # Display buttons for predefined questions side by side
@@ -148,7 +169,8 @@ for idx, question in enumerate(questions):
         handle_query(user_input)
         
 # Text input for user questions
-user_input = st.text_input("Enter your question here: ", placeholder="For example: Provide me bullet points of Nandini’s experience in IP Law")
+
+
 
 # Handle the user's input if they type a question and press Enter
 if user_input and not st.session_state.get('button_clicked', False):
@@ -158,31 +180,31 @@ if user_input and not st.session_state.get('button_clicked', False):
 
 # ----------------- skillset ----------------- #
 
-
+st.divider()
 with st.container():
     st.subheader('⚒️ Skills')
     col1, col2, col3, col4 = st.columns([1, 1, 1, 1])
-
     with col1:
-        st.markdown('<i class="fa fa-balance-scale" aria-hidden="true"></i> Intellectual Property Law', unsafe_allow_html=True)
+        st.markdown('<i class="fa fa-brain" aria-hidden="true"></i> Generative AI', unsafe_allow_html=True)  # Brain icon for AI
     with col2:
-        st.markdown('<i class="fa fa-copyright" aria-hidden="true"></i> Copyright Law', unsafe_allow_html=True)
+        st.markdown('<i class="fa fa-robot" aria-hidden="true"></i> Machine Learning', unsafe_allow_html=True)  # Robot icon for ML
     with col3:
-        st.markdown('<i class="fa fa-gavel" aria-hidden="true"></i> Patent Law', unsafe_allow_html=True)
+        st.markdown('<i class="fa fa-database" aria-hidden="true"></i> Data Science', unsafe_allow_html=True)  # Database icon for Data Science
     with col4:
-        st.markdown('<i class="fa fa-trademark" aria-hidden="true"></i> Trademarks', unsafe_allow_html=True)
+        st.markdown('<i class="fa fa-chart-line" aria-hidden="true"></i> Product Analytics', unsafe_allow_html=True)  # Line chart icon for Analytics
     with col1:
-        st.markdown('<i class="fa fa-search" aria-hidden="true"></i> Legal Analysis and Strategy', unsafe_allow_html=True)
+        st.markdown('<i class="fa fa-project-diagram" aria-hidden="true"></i> Product Management', unsafe_allow_html=True)  # Project diagram icon for Product Management
     with col2:
-        st.markdown('<i class="fa fa-handshake-o" aria-hidden="true"></i> Litigation and Contract Negotiation', unsafe_allow_html=True)
+        st.markdown('<i class="fa fa-handshake" aria-hidden="true"></i> Stakeholder Management', unsafe_allow_html=True)  # Handshake icon for Management
     with col3:
-        st.markdown('<i class="fa fa-pencil" aria-hidden="true"></i> Research and Legal Writing', unsafe_allow_html=True)
+        st.markdown('<i class="fa fa-bullhorn" aria-hidden="true"></i> Leadership', unsafe_allow_html=True)  # Bullhorn icon for Leadership
     with col4:
-        st.markdown('<i class="fa fa-users" aria-hidden="true"></i> Cross-functional Collaboration', unsafe_allow_html=True)
+        st.markdown('<i class="fa fa-users" aria-hidden="true"></i> Cross-functional Collaboration', unsafe_allow_html=True)  # Users icon for Collaboration
 
     
     
 # ----------------- timeline ----------------- #
+st.divider()
 import json
 
 st.subheader('Career Snapshot')
@@ -198,6 +220,7 @@ with st.spinner(text="Building Timeline"):
 
 
 # -----------------  endorsement  ----------------- #
+st.divider()
 st.subheader("👄 Coworker Endorsements")
 # Embed an HTML component to display the slideshow
 components.html(
@@ -264,6 +287,9 @@ f"""
     <div class="mySlides fade">
         <img src="data:image/jpeg;base64,{endorsements['img3']}" style="width:100%">
     </div>
+    <div class="mySlides fade">
+        <img src="data:image/jpeg;base64,{endorsements['img4']}" style="width:100%">
+    </div>
 </div>
 <br>
 <div style="text-align:center">
@@ -301,23 +327,31 @@ height=270,
 
 import streamlit as st
 
-with st.container():
-    col1, col2, col3 = st.columns(3)
+with st.sidebar.container():
+    st.divider()
 
+    col1, col2, col3 = st.columns(3)
+    st.markdown(" ")
     # LinkedIn Icon
+    st.markdown("""
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    """, unsafe_allow_html=True)
     with col1:
         st.markdown(
-            """<a href="https://www.linkedin.com/in/nandinicomar/" target="_blank">
-                   <img src="https://img.icons8.com/fluent/48/000000/linkedin.png" alt="LinkedIn">
+            """<a href="https://www.linkedin.com/in/kshitijyad/" target="_blank">
+                   <i class="fa-brands fa-linkedin fa-beat fa-2x" style="color: #ff0000;"></i>
                </a>""",
             unsafe_allow_html=True
         )
 
+    st.markdown("""
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    """, unsafe_allow_html=True)
     # Email Icon
     with col2:
         st.markdown(
-            """<a href="mailto:comarnan@gmail.com">
-                   <img src="https://img.icons8.com/fluent/48/000000/gmail.png" alt="Email">
+            """<a href="mailto:kshitijyad@gmail.com">
+                   <i class="fa-regular fa-envelope fa-beat fa-2x" style="color: #000000;"></i>
                </a>""",
             unsafe_allow_html=True
         )
@@ -325,8 +359,8 @@ with st.container():
     # Phone Icon
     with col3:
         st.markdown(
-            """<a href="tel:+1.201.620.1544">
-                   <img src="https://img.icons8.com/fluent/48/000000/phone.png" alt="Phone">
+            """<a href="tel:+1.916.793.9923">
+                   <i class="fa-solid fa-phone fa-beat fa-2x" style="color: #fff700;"></i>
                </a>""",
             unsafe_allow_html=True
         )
