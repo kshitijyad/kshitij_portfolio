@@ -129,6 +129,8 @@ def handle_query(query):
         except Exception as e:
             st.error("An error occurred: " + str(e))
 
+def reset_button_click_state():
+    st.session_state.button_clicked = False
 
 # Predefined questions
 questions = [
@@ -137,6 +139,9 @@ questions = [
     "What unique skills does Kshitij bring to a data science team, and how have these contributed to his previous workplaces?",
     "How has Kshitij demonstrated professional growth throughout his career, and what are his long-term professional aspirations?"
 ]
+
+if 'button_clicked' not in st.session_state:
+    st.session_state.button_clicked = False
 
 st.markdown('<br>', unsafe_allow_html=True)
 
@@ -162,22 +167,20 @@ st.markdown('<br> 🖋️ Or, **Simply click** these questions below 👇 ', uns
 
 
 # Display buttons for predefined questions side by side
+# Display buttons for predefined questions
 cols = st.columns(2)  # Create two columns
 for idx, question in enumerate(questions):
     if cols[idx % 2].button(question, key=f'btn{idx}'):
         user_input = question
+        st.session_state.button_clicked = True
         handle_query(user_input)
-        
-# Text input for user questions
-
-
 
 # Handle the user's input if they type a question and press Enter
-if user_input and not st.session_state.get('button_clicked', False):
+if user_input and not st.session_state.button_clicked:
     handle_query(user_input)
 
-
-
+# Reset the button click state at the end of the session
+reset_button_click_state()
 # ----------------- skillset ----------------- #
 
 st.divider()
