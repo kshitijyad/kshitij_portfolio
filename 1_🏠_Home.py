@@ -224,7 +224,7 @@ with st.spinner(text="Building Timeline"):
 
 # -----------------  endorsement  ----------------- #
 st.divider()
-st.subheader("👄 Coworker Endorsements")
+st.subheader("👯 Coworker Endorsements")
 # Embed an HTML component to display the slideshow
 components.html(
 f"""
